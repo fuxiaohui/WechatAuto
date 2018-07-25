@@ -1,0 +1,27 @@
+{
+  "name": "huigezuishuai_wechatauto",
+  "version": "1.0.0",
+  "description": "微信自动化操作",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fuxiaohui/huigezuishuai_WechatAuto.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fuxiaohui/huigezuishuai_WechatAuto/issues"
+  },
+  "homepage": "https://github.com/fuxiaohui/huigezuishuai_WechatAuto#readme",
+  "dependencies": {
+    "async": "^2.6.1",
+    "cheerio": "^1.0.0-rc.2",
+    "node-schedule": "^1.3.0",
+    "qrcode-terminal": "^0.12.0",
+    "request": "^2.87.0",
+    "wechaty": "^0.18.5"
+  }
+}
