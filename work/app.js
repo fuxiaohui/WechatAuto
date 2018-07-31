@@ -17,19 +17,22 @@ bot
     }
   })
 
+
   // 登录成功
-  .on('login', user => {
-    console.log(`User ${user} logined`);
+  .on('login', async function (user) {
+    console.log(`User ${user.name()} logined`);
 
 
-    setTimeout(function () {
-      bot.Room.find({topic: "test"}).then(function (room) {
-        console.log(room);
+    setTimeout(async function () {
+      const room = await bot.Room.find({topic: "蓝鸥Java分组"});
+      console.log(room);
 
+      if (room != null) {
         room.say("大家好!");
 
-      })
-    }, 5000);
+        task(room);
+      }
+    }, 3000);
 
   })
 
@@ -84,11 +87,11 @@ function task(room) {
   // 简报微刊
   // 每天 8点30
   schedule.scheduleJob('0 30 8 * * *', function () {
-    room.say(news());
+    news(room);
   });
 }
 
-function news() {
+function news(room) {
   const ut = require('./common.js');
   const async = require('async');
   console.log('开始测试!!!');
@@ -129,20 +132,21 @@ function news() {
       if (html.indexOf('<title>302 Found</title>') != -1) return;
       if (html.indexOf('您的访问过于频繁') != -1) return;
 
-      var $ = cheerio.load(html);
-      var text = $("#js_content section[data-tools-id]").text();
+      const $ = cheerio.load(html);
+      const text = $("#js_content section[data-tools-id]").text();
       console.log(text);
-      var a = text.replace(/\d{1,2}、/g, '\n$&').replace(/【/g, '\n$&').replace("（公众号：简报微刊）", "");
+      const a = text.replace(/\d{1,2}、/g, '\n$&').replace(/【/g, '\n$&').replace("（公众号：简报微刊）", "");
       console.log(a);
-      return a;
+      room.say(a);
     });
+
   });
 }
 
 // 获取当前的日期时间 格式“MM月dd日”
 function getNowFormatDate() {
-  var date = new Date();
-  var month = date.getMonth() + 1;
-  var day = date.getDate();
+  const date = new Date();
+  const month = date.getMonth() + 1;
+  const day = date.getDate();
   return month + "月" + day + "日";
 }
