@@ -24,7 +24,7 @@ bot
 
 
     setTimeout(async function () {
-      const room = await bot.Room.find({topic: "蓝鸥Java分组"});
+      const room = await bot.Room.find({topic: "test"});
       console.log(room);
 
       if (room != null) {
@@ -56,13 +56,13 @@ function task(room) {
 
   // 讲师反馈周报
   // 每周1 8点40
-  schedule.scheduleJob('0 40 8 * * 5', function () {
+  schedule.scheduleJob('0 40 8 * * 1', function () {
     room.say("友情提示: 上课前请反馈上周周报中学员提出的问题");
   });
 
   // 提醒讲师进行周考
   // 每周2 8点40
-  schedule.scheduleJob('0 40 8 * * 5', function () {
+  schedule.scheduleJob('0 40 8 * * 2', function () {
     room.say("友情提示: 下午5点进行周考, 请提前打印答题卡");
   });
 
@@ -86,7 +86,7 @@ function task(room) {
 
   // 简报微刊
   // 每天 8点30
-  schedule.scheduleJob('0 30 8 * * *', function () {
+  schedule.scheduleJob('0 35 8 * * *', function () {
     news(room);
   });
 }
